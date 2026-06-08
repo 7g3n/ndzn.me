@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import blackBoxArt from "../assets/black-box.jpg";
 import logoUrl from "../assets/logo.png";
+import dirtyCrazyzArt from "../assets/my-name-is-dirty-crazyz.jpg";
 
 type PixelSample = {
   width: number;
@@ -56,6 +58,21 @@ declare global {
 
 const trailCount = 7;
 
+const musicWorks = [
+  {
+    href: "https://open.spotify.com/album/5k0qssjmKe4ZkEic1TrkuE",
+    image: blackBoxArt,
+    alt: "Black Box album artwork",
+    label: "Neural Palette\n(Techcore crew - Black Box Tr.04)",
+  },
+  {
+    href: "https://open.spotify.com/album/3P3iBzOUBgxYDU3Iobt5M8?si=R4FIoX25RKWjJGSUb7kphg",
+    image: dirtyCrazyzArt,
+    alt: "My Name Is DirtyCrazyZ album artwork",
+    label: "ear break\n(DirtyCrazyZ - My Name Is DirtyCrazyZ Tr.02)",
+  },
+];
+
 function App() {
   const sceneRef = useRef<HTMLElement | null>(null);
   const cursorRef = useRef<HTMLDivElement | null>(null);
@@ -83,6 +100,26 @@ function App() {
             現在は、React、Three.js、 Web Audio API、WebGLなどを用いたWebアプリケーション制作や、
             音の可視化・生成ツール、 インタラクティブな表現を中心に制作している。
           </p>
+        </section>
+
+        <section className="copy-section copy-section-music" aria-labelledby="music-title">
+          <h2 id="music-title">Music Works</h2>
+          <div className="music-works" aria-label="Music works">
+            {musicWorks.map((work) => (
+              <article className="music-work" key={work.href}>
+                <a
+                  className="music-art-link"
+                  href={work.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Listen to ${work.label.replace(/\n/g, " ")}`}
+                >
+                  <img src={work.image} alt={work.alt} loading="lazy" />
+                </a>
+                <p className="music-work-caption">{work.label}</p>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section className="copy-section copy-section-list copy-section-skillset" aria-labelledby="skillset-title">
