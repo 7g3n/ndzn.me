@@ -6,6 +6,8 @@
   background: #000;
   color: #fff;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --page-gutter: 32px;
+  --content-max: 1360px;
 }
 
 html,
@@ -60,17 +62,23 @@ canvas {
   height: 100%;
 }
 
+img {
+  max-width: 100%;
+}
+
 .page-copy {
   position: relative;
   z-index: 1;
-  min-height: 4958px;
+  width: 100%;
+  min-height: 100%;
+  padding-bottom: clamp(96px, 14svh, 180px);
   color: rgba(255, 255, 255, 0.9);
   pointer-events: none;
 }
 
 .hero-copy {
-  min-height: 910px;
-  padding-top: 329px;
+  min-height: clamp(680px, 126svh, 920px);
+  padding: clamp(144px, 45svh, 329px) var(--page-gutter) 0;
   text-align: center;
 }
 
@@ -95,35 +103,39 @@ canvas {
 
 .copy-section {
   display: grid;
-  grid-template-columns: 32px minmax(380px, 468px) minmax(520px, 1fr) 32px;
+  grid-template-columns: minmax(208px, 416px) minmax(0, 900px);
+  column-gap: clamp(24px, 3vw, 64px);
+  row-gap: 24px;
   align-items: start;
-  min-height: 700px;
-  padding-top: 42px;
+  width: min(100%, var(--content-max));
+  min-height: clamp(560px, 92svh, 820px);
+  margin: 0 auto;
+  padding: clamp(40px, 7svh, 72px) var(--page-gutter) 0;
 }
 
 .copy-section-about {
-  min-height: 737px;
+  min-height: clamp(640px, 96svh, 780px);
 }
 
 .copy-section-music {
-  min-height: 690px;
+  min-height: clamp(560px, 86svh, 700px);
   pointer-events: auto;
 }
 
 .copy-section-skillset {
-  min-height: 809px;
+  min-height: clamp(640px, 98svh, 820px);
 }
 
 .copy-section-supporting {
-  min-height: 700px;
+  min-height: clamp(560px, 86svh, 720px);
 }
 
 .copy-section-social {
-  min-height: 658px;
+  min-height: clamp(540px, 82svh, 680px);
 }
 
 .copy-section h2 {
-  grid-column: 2;
+  grid-column: 1;
   margin: 0;
   color: rgba(255, 255, 255, 0.86);
   font-size: 2rem;
@@ -134,17 +146,18 @@ canvas {
 
 .copy-section p,
 .copy-section ul {
-  grid-column: 3;
+  grid-column: 2;
   margin: 0;
   color: rgba(255, 255, 255, 0.82);
   font-size: 1.95rem;
   font-weight: 400;
   line-height: 1.16;
   letter-spacing: 0;
+  overflow-wrap: anywhere;
 }
 
 .copy-section .music-works {
-  grid-column: 3;
+  grid-column: 2;
   width: min(100%, 680px);
   padding-top: 64px;
   pointer-events: auto;
@@ -153,7 +166,7 @@ canvas {
 .copy-section-about p {
   max-width: 900px;
   padding-top: 48px;
-  font-size: clamp(0.84rem, 0.92vw, 1rem);
+  font-size: 0.95rem;
   line-height: 1.72;
   text-wrap: pretty;
 }
@@ -177,9 +190,10 @@ canvas {
 
 .music-works {
   display: grid;
-  grid-template-columns: repeat(2, minmax(180px, 260px));
+  grid-template-columns: repeat(2, minmax(0, 260px));
   gap: clamp(24px, 3vw, 44px);
   align-items: start;
+  justify-content: start;
 }
 
 .music-work {
@@ -221,10 +235,22 @@ canvas {
 .music-work-caption {
   margin: 18px 0 0;
   color: rgba(255, 255, 255, 0.78);
-  font-size: clamp(0.82rem, 0.9vw, 1.02rem);
+  font-size: 0.95rem;
   line-height: 1.46;
-  white-space: pre-line;
+  white-space: normal;
   transition: color 260ms ease, transform 260ms ease;
+}
+
+.copy-section .music-work-caption {
+  font-size: 0.95rem;
+}
+
+.music-work-caption span {
+  display: block;
+}
+
+.music-work-caption-detail-compact {
+  font-size: 0.84rem;
 }
 
 .music-work:hover .music-work-caption,
@@ -258,7 +284,7 @@ canvas {
 }
 
 .copy-section-contact {
-  min-height: 454px;
+  min-height: clamp(420px, 62svh, 520px);
 }
 
 .copy-section-contact p {
@@ -335,12 +361,78 @@ body.has-pointer .cursor-trail {
   }
 }
 
-@media (max-width: 760px) {
+@media (min-width: 1600px) {
+  :root {
+    --content-max: 1520px;
+  }
+
+  .hero-copy h1 {
+    font-size: 4.8rem;
+  }
+
+  .hero-copy p {
+    font-size: 1rem;
+  }
+
+  .copy-section {
+    grid-template-columns: minmax(240px, 480px) minmax(0, 960px);
+  }
+
+  .copy-section h2 {
+    font-size: 2.1rem;
+  }
+
+  .copy-section p,
+  .copy-section ul {
+    font-size: 2.1rem;
+  }
+
+  .copy-section-about p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --page-gutter: 28px;
+  }
+
+  .copy-section {
+    grid-template-columns: minmax(176px, 320px) minmax(0, 1fr);
+    column-gap: 32px;
+    min-height: clamp(544px, 86svh, 736px);
+  }
+
+  .copy-section p,
+  .copy-section ul {
+    font-size: 1.6rem;
+  }
+
+  .copy-section-about p {
+    font-size: 0.88rem;
+  }
+
+  .copy-section .music-works {
+    width: min(100%, 560px);
+  }
+
+  .music-works {
+    grid-template-columns: repeat(2, minmax(0, 216px));
+    gap: 28px;
+  }
+}
+
+@media (max-width: 820px) {
+  :root {
+    --page-gutter: 24px;
+  }
+
   .page-copy {
-    min-height: 4240px;
+    padding-bottom: 80px;
   }
 
   .hero-copy {
+    min-height: 88svh;
     padding-top: 18svh;
   }
 
@@ -355,15 +447,16 @@ body.has-pointer .cursor-trail {
   }
 
   .copy-section {
-    grid-template-columns: 24px 1fr 24px;
-    min-height: 620px;
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 544px;
+    margin-bottom: 96px;
     padding-top: 34px;
   }
 
   .copy-section h2,
   .copy-section p,
   .copy-section ul {
-    grid-column: 2;
+    grid-column: 1;
   }
 
   .copy-section h2 {
@@ -372,25 +465,26 @@ body.has-pointer .cursor-trail {
 
   .copy-section p,
   .copy-section ul {
-    margin-top: 96px;
+    margin-top: 88px;
     font-size: 1.45rem;
   }
 
   .copy-section-about p {
     margin-top: 28px;
     padding-top: 0;
-    font-size: clamp(0.74rem, 3.15vw, 0.9rem);
+    font-size: 0.88rem;
     line-height: 1.7;
   }
 
   .copy-section .music-works {
+    grid-column: 1;
     width: 100%;
     padding-top: 0;
     margin-top: 76px;
   }
 
   .copy-section-music {
-    min-height: 620px;
+    min-height: 540px;
   }
 
   .music-works {
@@ -406,8 +500,16 @@ body.has-pointer .cursor-trail {
 
   .music-work-caption {
     margin-top: 12px;
-    font-size: clamp(0.66rem, 2.8vw, 0.82rem);
+    font-size: 0.78rem;
     line-height: 1.42;
+  }
+
+  .copy-section .music-work-caption {
+    font-size: 0.78rem;
+  }
+
+  .music-work-caption-detail-compact {
+    font-size: 0.68rem;
   }
 
   .copy-section-skillset ul,
@@ -419,6 +521,118 @@ body.has-pointer .cursor-trail {
 
   .copy-section-contact {
     min-height: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --page-gutter: 18px;
+  }
+
+  .hero-copy {
+    min-height: 78svh;
+    padding-top: 16svh;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.35rem;
+  }
+
+  .hero-copy p {
+    max-width: 320px;
+    font-size: 0.72rem;
+  }
+
+  .copy-section {
+    min-height: 500px;
+    margin-bottom: 72px;
+    padding-top: 28px;
+  }
+
+  .copy-section h2 {
+    font-size: 1.18rem;
+  }
+
+  .copy-section p,
+  .copy-section ul {
+    margin-top: 70px;
+    font-size: 1.16rem;
+    line-height: 1.22;
+  }
+
+  .copy-section-about p {
+    margin-top: 22px;
+    font-size: 0.76rem;
+    line-height: 1.66;
+  }
+
+  .copy-section .music-works {
+    margin-top: 60px;
+  }
+
+  .copy-section-music {
+    min-height: 460px;
+  }
+
+  .music-works {
+    gap: 12px;
+  }
+
+  .music-work-caption {
+    margin-top: 10px;
+    font-size: 0.68rem;
+    line-height: 1.38;
+  }
+
+  .copy-section .music-work-caption {
+    font-size: 0.68rem;
+  }
+
+  .music-work-caption-detail-compact {
+    font-size: 0.58rem;
+  }
+
+  .copy-section-contact {
+    min-height: 340px;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --page-gutter: 16px;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.05rem;
+  }
+
+  .hero-copy p {
+    font-size: 0.68rem;
+  }
+
+  .copy-section p,
+  .copy-section ul {
+    font-size: 1.04rem;
+  }
+
+  .copy-section-about p {
+    font-size: 0.72rem;
+  }
+
+  .music-works {
+    gap: 10px;
+  }
+
+  .music-work-caption {
+    font-size: 0.62rem;
+  }
+
+  .copy-section .music-work-caption {
+    font-size: 0.62rem;
+  }
+
+  .music-work-caption-detail-compact {
+    font-size: 0.52rem;
   }
 }
 

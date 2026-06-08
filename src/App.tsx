@@ -63,13 +63,16 @@ const musicWorks = [
     href: "https://open.spotify.com/album/5k0qssjmKe4ZkEic1TrkuE",
     image: blackBoxArt,
     alt: "Black Box album artwork",
-    label: "Neural Palette\n(Techcore crew - Black Box Tr.04)",
+    title: "Neural Palette",
+    detail: "(Techcore crew - Black Box Tr.04)",
   },
   {
     href: "https://open.spotify.com/album/3P3iBzOUBgxYDU3Iobt5M8?si=R4FIoX25RKWjJGSUb7kphg",
     image: dirtyCrazyzArt,
     alt: "My Name Is DirtyCrazyZ album artwork",
-    label: "ear break\n(DirtyCrazyZ - My Name Is DirtyCrazyZ Tr.02)",
+    title: "ear break",
+    detail: "(DirtyCrazyZ - My Name Is DirtyCrazyZ Tr.02)",
+    detailClassName: "music-work-caption-detail-compact",
   },
 ];
 
@@ -112,11 +115,14 @@ function App() {
                   href={work.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Listen to ${work.label.replace(/\n/g, " ")}`}
+                  aria-label={`Listen to ${work.title} ${work.detail}`}
                 >
                   <img src={work.image} alt={work.alt} loading="lazy" />
                 </a>
-                <p className="music-work-caption">{work.label}</p>
+                <p className="music-work-caption">
+                  <span>{work.title}</span>
+                  <span className={`music-work-caption-detail ${work.detailClassName ?? ""}`}>{work.detail}</span>
+                </p>
               </article>
             ))}
           </div>
