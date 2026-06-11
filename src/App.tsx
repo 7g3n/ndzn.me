@@ -96,7 +96,7 @@ function App() {
         <section className="copy-section copy-section-about" aria-labelledby="about-title">
           <h2 id="about-title">About me</h2>
           <p>
-            Nagisa Dozonoは、2005年3月26日生まれの音楽家 / フロントエンドエンジニア。
+            Nagisa Dozonoは、2005年3月26日生まれの音楽家 / フロントエンドエンジニア。<br />
             幼少期からPCや音楽に触れ、N高等学校に入学。<br />
             卒業後は、楽曲制作とWeb開発を並行して学びながら、
             アーティストコレクティブレーベル「TRAJECTORIES」を設立。<br />
